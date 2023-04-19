@@ -8,14 +8,14 @@ import {
 } from '@vkontakte/vkui'
 import '@vkontakte/vkui/dist/vkui.css'
 
-function App() {
+const App = (): JSX.Element => {
   const [popout] = useState(<ScreenSpinner size="large" />)
 
   return (
     <SplitLayout popout={popout}>
       <SplitCol>
-        <View>
-          <Panel id="main" />
+        <View activePanel="main">
+          <Panel id="main"></Panel>
         </View>
       </SplitCol>
     </SplitLayout>
