@@ -3,21 +3,25 @@
     "browser": true,
     "es2021": true
   },
+  "overrides": [],
   "extends": [
+    "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:import/recommended",
-    "prettier"
+    "plugin:react/jsx-runtime",
+    "plugin:@typescript-eslint/recommended"
   ],
-  "overrides": [],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["react"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
