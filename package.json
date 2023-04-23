@@ -24,6 +24,7 @@
     "@vkontakte/vk-miniapps-deploy": "0.0.26",
     "@vkontakte/vkui": "5.3.1",
     "babel-eslint": "^10.1.0",
+    "classnames": "^2.3.2",
     "eruda": "^3.0.0",
     "eruda-code": "^2.1.0",
     "eruda-dom": "^2.0.0",

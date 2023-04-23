@@ -1,0 +1,8 @@
+.Preview {
+  margin-top: 20px;
+  margin: 0 auto;
+}
+
+.Preview img {
+  max-width: 400px;
+}
