@@ -1,0 +1,64 @@
+:root {
+  --activeColor: #39f;
+  --disableColor: black;
+}
+
+.DropPopup__dropZone {
+  max-width: 500px;
+  min-height: 500px;
+
+  box-sizing: border-box;
+  background-color: white;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 6px 8px;
+  gap: 10px;
+  margin: auto;
+
+  border: 4px dashed var(--disableColor);
+  border-radius: 4px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+  color: var(--disableColor);
+}
+
+.DropPopup__dropZone_select {
+  border: 4px dashed var(--activeColor);
+  color: var(--activeColor);
+}
+
+.DropPopup__dropZone_select > * {
+  pointer-events: none;
+}
+
+.DropPopup {
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.DropPopup__disable {
+  display: none;
+}
+
+.DropPopup__icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.DropPopup__text {
+  font-size: 24px;
+  text-align: center;
+}
