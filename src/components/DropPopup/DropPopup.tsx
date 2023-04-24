@@ -1,6 +1,6 @@
 import UploadDropZone from '@rpldy/upload-drop-zone'
 import { Icon56GalleryOutline } from '@vkontakte/icons'
-import classNames from 'classnames'
+import cx from 'classnames'
 import React from 'react'
 import { Div } from '@vkontakte/vkui'
 
@@ -15,11 +15,6 @@ const LoaderPopup: React.FC<LoaderPopupProps> = ({
   isDraging,
   discardDrag,
 }) => {
-  const btnClass = classNames({
-    DropPopup: isDraging,
-    DropPopup__disable: !isDraging,
-  })
-
   return (
     <div
       onDragOver={(e) => e.preventDefault()}
@@ -28,7 +23,10 @@ const LoaderPopup: React.FC<LoaderPopupProps> = ({
         e.preventDefault()
         discardDrag()
       }}
-      className={btnClass}
+      className={cx({
+        DropPopup: isDraging,
+        DropPopup__disable: !isDraging,
+      })}
     >
       <UploadDropZone
         className="DropPopup__dropZone"
@@ -43,4 +41,4 @@ const LoaderPopup: React.FC<LoaderPopupProps> = ({
   )
 }
 
-export default LoaderPopup
+export default React.memo(LoaderPopup)

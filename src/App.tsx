@@ -1,39 +1,97 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useUploady } from '@rpldy/shared-ui'
-import { SplitLayout, SplitCol, Panel } from '@vkontakte/vkui'
-import { DropPopup, ImagePreview, LoadButton } from './components'
-
+import {
+  DropPopup,
+  ImagePreview,
+  LoadButton,
+  RestartButton,
+  ResultCard,
+} from './components'
+import { SplitLayout, SplitCol, Panel, Placeholder } from '@vkontakte/vkui'
+import { Icon56TagOutline } from '@vkontakte/icons'
+import {
+  useAbortAll,
+  useItemFinishListener,
+  useItemStartListener,
+} from '@rpldy/uploady'
+import { ProcessStatus, ServerAnswer } from './types'
 import '@vkontakte/vkui/dist/vkui.css'
 import './App.css'
 
 const App = (): JSX.Element => {
-  const [popout] = React.useState(<></>)
-  const [isDraging, setIsDraging] = React.useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [processStatus, setProcessStatus] = useState(ProcessStatus.Start)
+  const [serverAnswer, setServerAnswer] = useState<ServerAnswer>(null)
+
   const { upload } = useUploady()
+  const abortAll = useAbortAll()
 
-  const discardDrag = React.useCallback(() => setIsDraging(false), [])
+  const discardDrag = useCallback(() => setIsDragging(false), [])
 
-  React.useEffect(() => {
+  const abortConnection = useCallback(() => {
+    abortAll()
+    setProcessStatus(ProcessStatus.Start)
+  }, [abortAll])
+
+  const onRestart = useCallback(() => {
+    setProcessStatus(ProcessStatus.Start)
+    setServerAnswer(null)
+  }, [])
+
+  useItemFinishListener((item) => {
+    setServerAnswer(item.uploadResponse.data)
+    setProcessStatus(ProcessStatus.Result)
+  })
+
+  useItemStartListener(() => {
+    setProcessStatus(ProcessStatus.Pending)
+  })
+
+  // Обработка события paste
+  useEffect(() => {
+    // При входе в мини-апп фокус находится не в iframe, нужно явно его поставить
     window.focus()
-    window.addEventListener('paste', (e) => {
+    function onPaste(e: ClipboardEvent) {
       const files = e.clipboardData?.files
-      if (!files) return
+      if (!files || processStatus === ProcessStatus.Start) return
       upload(files as unknown as string[], { params: { test: 'paste' } })
-    })
-  }, [upload])
+    }
+    window.addEventListener('paste', onPaste)
+
+    return () => window.removeEventListener('paste', onPaste)
+  }, [upload, processStatus])
 
   return (
-    <SplitLayout popout={popout}>
+    <SplitLayout>
       <SplitCol>
         <Panel
-          onDragEnter={() => setIsDraging(true)}
-          onMouseEnter={() => setIsDraging(false)}
+          onDragEnter={() => setIsDragging(true)}
+          onMouseEnter={() => setIsDragging(false)}
         >
           <div className="App">
-            <ImagePreview />
-            <DropPopup {...{ discardDrag, isDraging }} />
-            <LoadButton />
+            <ImagePreview
+              abortConnection={abortConnection}
+              status={processStatus}
+            />
+
+            {serverAnswer && <ResultCard {...serverAnswer} />}
+
+            {processStatus === ProcessStatus.Start && (
+              <Placeholder
+                icon={<Icon56TagOutline />}
+                header="Определить питомца на фото"
+                action={<LoadButton />}
+              >
+                Наши алгоритмы узнают, кто изображён на фотографии
+              </Placeholder>
+            )}
+
+            {serverAnswer && <RestartButton onRestart={onRestart} />}
           </div>
+
+          {processStatus === ProcessStatus.Start && (
+            <DropPopup {...{ discardDrag, isDraging: isDragging }} />
+          )}
         </Panel>
       </SplitCol>
     </SplitLayout>

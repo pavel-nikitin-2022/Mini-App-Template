@@ -1,8 +1,34 @@
 .Preview {
-  margin-top: 20px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 270px;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  backface-visibility: hidden;
 }
 
 .Preview img {
-  max-width: 400px;
+  transition: transform 0.75s ease-in-out;
+}
+
+.Preview_unload img {
+  opacity: 0.5;
+}
+
+.Preview_result img {
+  transform: translateY(-100px);
+}
+
+.Preview__spinner {
+  position: absolute;
+  z-index: 100;
+}
+
+.Preview img {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 16px;
 }
