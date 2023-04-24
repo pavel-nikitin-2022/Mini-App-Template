@@ -9,6 +9,7 @@
 
   box-sizing: border-box;
   background-color: white;
+  backface-visibility: hidden;
 
   display: flex;
   flex-direction: row;
@@ -50,7 +51,11 @@
 }
 
 .DropPopup__disable {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
 }
 
 .DropPopup__icon {

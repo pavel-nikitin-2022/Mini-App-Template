@@ -14,4 +14,4 @@ const UploadButton = asUploadButton(
   })
 )
 
-export default UploadButton
+export default React.memo(UploadButton)

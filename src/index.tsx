@@ -7,7 +7,10 @@ import Uploady from '@rpldy/uploady'
 import { getMockSenderEnhancer } from '@rpldy/mock-sender'
 
 bridge.send('VKWebAppInit')
-const mockSenderEnhancer = getMockSenderEnhancer({})
+const mockSenderEnhancer = getMockSenderEnhancer({
+  response: { animal: 'Выдра', probability: 80 },
+  delay: 3000,
+})
 
 // Фильтр на файлы
 const filter = (file: File | string, index: number) => {
@@ -21,6 +24,7 @@ ReactDOM.render(
     <AdaptivityProvider>
       <AppRoot>
         <Uploady
+          accept=".png,.jpg,.jpeg"
           fileFilter={filter}
           multiple={false}
           enhancer={mockSenderEnhancer}

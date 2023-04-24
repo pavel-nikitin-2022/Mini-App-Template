@@ -1,0 +1,48 @@
+@keyframes resultCard {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(-90px);
+    opacity: 1;
+  }
+}
+
+.ResultCard {
+  padding: 14px 16px;
+  width: 343px;
+  background: #edeef0;
+  border-radius: 16px !important;
+
+  animation: resultCard 0.75s ease-in-out forwards;
+}
+
+.ResultCard__subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+  height: 18px;
+  color: #818c99;
+}
+
+.ResultCard__title {
+  height: 32px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 32px;
+
+  display: flex;
+  align-items: center;
+
+  color: #2688eb;
+}
