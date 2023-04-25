@@ -53,7 +53,7 @@ const App = (): JSX.Element => {
     window.focus()
     function onPaste(e: ClipboardEvent) {
       const files = e.clipboardData?.files
-      if (!files || processStatus === ProcessStatus.Start) return
+      if (!files || processStatus !== ProcessStatus.Start) return
       upload(files as unknown as string[], { params: { test: 'paste' } })
     }
     window.addEventListener('paste', onPaste)
@@ -98,4 +98,4 @@ const App = (): JSX.Element => {
   )
 }
 
-export default App
+export { App }

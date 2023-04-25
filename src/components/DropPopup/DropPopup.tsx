@@ -11,10 +11,7 @@ type LoaderPopupProps = {
   discardDrag: () => void
 }
 
-const LoaderPopup: React.FC<LoaderPopupProps> = ({
-  isDraging,
-  discardDrag,
-}) => {
+let DropPopup: React.FC<LoaderPopupProps> = ({ isDraging, discardDrag }) => {
   return (
     <div
       onDragOver={(e) => e.preventDefault()}
@@ -25,7 +22,7 @@ const LoaderPopup: React.FC<LoaderPopupProps> = ({
       }}
       className={cx({
         DropPopup: isDraging,
-        DropPopup__disable: !isDraging,
+        DropPopup_disable: !isDraging,
       })}
     >
       <UploadDropZone
@@ -41,4 +38,6 @@ const LoaderPopup: React.FC<LoaderPopupProps> = ({
   )
 }
 
-export default React.memo(LoaderPopup)
+DropPopup = React.memo(DropPopup)
+
+export { DropPopup }

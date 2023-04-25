@@ -4,7 +4,7 @@ import React from 'react'
 
 import './LoadButton.css'
 
-const UploadButton = asUploadButton(
+let LoadButton = asUploadButton(
   React.forwardRef<HTMLDivElement>(function сreateUploadButton(props, ref) {
     return (
       <div ref={ref} {...props} className="UploadButton">
@@ -14,4 +14,6 @@ const UploadButton = asUploadButton(
   })
 )
 
-export default React.memo(UploadButton)
+LoadButton = React.memo(LoadButton)
+
+export { LoadButton }
