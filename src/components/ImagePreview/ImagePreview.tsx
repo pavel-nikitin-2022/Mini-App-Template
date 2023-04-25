@@ -1,4 +1,4 @@
-import UploadPreview from '@rpldy/upload-preview'
+import UploadPreview, { PreviewMethods } from '@rpldy/upload-preview'
 import React, { useEffect, useRef } from 'react'
 import cx from 'classnames'
 import { Button, Spinner } from '@vkontakte/vkui'
@@ -10,12 +10,7 @@ type ImagePreviewProps = {
   abortConnection: () => void
 }
 
-type PreviewMethods = {
-  clear: () => void
-  removePreview: (id: string) => void
-}
-
-const ImagePreview: React.FC<ImagePreviewProps> = ({
+let ImagePreview: React.FC<ImagePreviewProps> = ({
   status,
   abortConnection,
 }) => {
@@ -58,4 +53,6 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   )
 }
 
-export default React.memo(ImagePreview)
+ImagePreview = React.memo(ImagePreview)
+
+export { ImagePreview }

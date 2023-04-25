@@ -6,7 +6,7 @@ type ResultButtonsProps = {
   onRestart: () => void
 }
 
-const ResultButtons: React.FC<ResultButtonsProps> = ({ onRestart }) => {
+let RestartButton: React.FC<ResultButtonsProps> = ({ onRestart }) => {
   return (
     <div className="RestartButton">
       <Button stretched={true} onClick={onRestart}>
@@ -16,4 +16,6 @@ const ResultButtons: React.FC<ResultButtonsProps> = ({ onRestart }) => {
   )
 }
 
-export default React.memo(ResultButtons)
+RestartButton = React.memo(RestartButton)
+
+export { RestartButton }

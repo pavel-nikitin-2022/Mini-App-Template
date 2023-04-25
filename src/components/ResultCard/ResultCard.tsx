@@ -3,7 +3,7 @@ import { Card } from '@vkontakte/vkui'
 import { ServerAnswer } from '../../types'
 import './ResultCard.css'
 
-const ImagePreview: React.FC<ServerAnswer> = ({ animal, probability }) => {
+let ResultCard: React.FC<ServerAnswer> = ({ animal, probability }) => {
   return (
     <Card className="ResultCard">
       <div className="ResultCard__subtitle">Алгоритм уверен что это</div>
@@ -15,4 +15,6 @@ const ImagePreview: React.FC<ServerAnswer> = ({ animal, probability }) => {
   )
 }
 
-export default React.memo(ImagePreview)
+ResultCard = React.memo(ResultCard)
+
+export { ResultCard }
