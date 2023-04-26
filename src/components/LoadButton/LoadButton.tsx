@@ -5,11 +5,11 @@ import React from 'react'
 import './LoadButton.css'
 
 let LoadButton = asUploadButton(
-  React.forwardRef<HTMLDivElement>(function сreateUploadButton(props, ref) {
+  React.forwardRef<HTMLButtonElement>(function сreateUploadButton(props, ref) {
     return (
-      <div ref={ref} {...props} className="UploadButton">
-        <Button>Загрузить</Button>
-      </div>
+      <Button {...props} className="UploadButton" getRootRef={ref}>
+        Загрузить
+      </Button>
     )
   })
 )

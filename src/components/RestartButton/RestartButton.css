@@ -11,9 +11,10 @@
 }
 
 .RestartButton {
-  position: absolute;
+  position: absolute !important;
   bottom: 0px;
-  width: 90%;
-  margin: auto;
+  width: 90% !important;
+  max-width: 374px !important;
+  margin: 0 auto !important;
   animation: bubling 0.75s ease-in-out forwards;
 }
