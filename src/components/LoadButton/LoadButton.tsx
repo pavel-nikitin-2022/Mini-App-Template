@@ -4,7 +4,6 @@ import React from 'react'
 
 import './LoadButton.css'
 
-// TODO проверить что не поломалось
 let LoadButton = asUploadButton(
   React.forwardRef<HTMLButtonElement>(function сreateUploadButton(props, ref) {
     return (

@@ -8,11 +8,9 @@ type ResultButtonsProps = {
 
 let RestartButton: React.FC<ResultButtonsProps> = ({ onRestart }) => {
   return (
-    <div className="RestartButton">
-      <Button stretched={true} onClick={onRestart}>
-        Вернуться
-      </Button>
-    </div>
+    <Button className="RestartButton" stretched={true} onClick={onRestart}>
+      Вернуться
+    </Button>
   )
 }
 
