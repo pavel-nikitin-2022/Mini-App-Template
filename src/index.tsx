@@ -1,23 +1,50 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import bridge from '@vkontakte/vk-bridge'
-import { ConfigProvider, AdaptivityProvider, AppRoot } from '@vkontakte/vkui'
-import { App } from './App'
 import Uploady from '@rpldy/uploady'
 import { getMockSenderEnhancer } from '@rpldy/mock-sender'
+import { ConfigProvider, AdaptivityProvider, AppRoot } from '@vkontakte/vkui'
+import { fileFilter } from './utils'
+import { App } from './App'
 
 bridge.send('VKWebAppInit')
 const mockSenderEnhancer = getMockSenderEnhancer({
-  response: { animal: 'Выдра', probability: 80 },
-  delay: 3000,
+  response: {
+    multiobject_labels: [
+      {
+        status: 0,
+        name: 'file',
+        labels: [
+          {
+            eng: 'Person',
+            rus: 'Человек',
+            eng_categories: [],
+            rus_categories: [],
+            prob: 0.9586,
+            coord: [84, 309, 148, 404],
+          },
+          {
+            eng: 'Person',
+            rus: 'Человек',
+            eng_categories: [],
+            rus_categories: [],
+            prob: 0.9102,
+            coord: [130, 325, 238, 428],
+          },
+          {
+            eng: 'Person',
+            rus: 'Человек',
+            eng_categories: [],
+            rus_categories: [],
+            prob: 0.8765,
+            coord: [208, 293, 258, 353],
+          },
+        ],
+      },
+    ],
+  },
+  delay: 300,
 })
-
-// Фильтр на файлы
-const filter = (file: File | string, index: number) => {
-  if (typeof file === 'string') return false
-  const type = file.type.replace(/\/.+/, '')
-  return type === 'image' && index === 0
-}
 
 ReactDOM.render(
   <ConfigProvider>
@@ -25,9 +52,23 @@ ReactDOM.render(
       <AppRoot>
         <Uploady
           accept=".png,.jpg,.jpeg"
-          fileFilter={filter}
+          fileFilter={fileFilter}
           multiple={false}
+          clearPendingOnAdd
+          maxConcurrent={1}
           enhancer={mockSenderEnhancer}
+          destination={{
+            url: 'https://lunacom.com',
+            filesParamName: 'file',
+            headers: {
+              mode: ['scene', 'multiobject', 'pedestrian'],
+              images: [
+                {
+                  name: 'file',
+                },
+              ],
+            },
+          }}
         >
           <App />
         </Uploady>

@@ -1,5 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  useAbortAll,
+  useItemFinishListener,
+  useItemStartListener,
+} from '@rpldy/uploady'
 import { useUploady } from '@rpldy/shared-ui'
+import { serverParser } from './utils'
 import {
   DropPopup,
   ImagePreview,
@@ -9,11 +15,7 @@ import {
 } from './components'
 import { SplitLayout, SplitCol, Panel, Placeholder } from '@vkontakte/vkui'
 import { Icon56TagOutline } from '@vkontakte/icons'
-import {
-  useAbortAll,
-  useItemFinishListener,
-  useItemStartListener,
-} from '@rpldy/uploady'
+
 import { ProcessStatus, ServerAnswer } from './types'
 import '@vkontakte/vkui/dist/vkui.css'
 import './App.css'
@@ -21,7 +23,9 @@ import './App.css'
 const App = (): JSX.Element => {
   const [isDragging, setIsDragging] = useState(false)
   const [processStatus, setProcessStatus] = useState(ProcessStatus.Start)
-  const [serverAnswer, setServerAnswer] = useState<ServerAnswer>(null)
+  const [imageWidth, setImageWidth] = React.useState(NaN)
+
+  const serverAnswer = useRef<ServerAnswer>(null)
 
   const { upload } = useUploady()
   const abortAll = useAbortAll()
@@ -35,21 +39,27 @@ const App = (): JSX.Element => {
 
   const onRestart = useCallback(() => {
     setProcessStatus(ProcessStatus.Start)
-    setServerAnswer(null)
+    serverAnswer.current = null
   }, [])
 
   useItemFinishListener((item) => {
-    setServerAnswer(item.uploadResponse.data)
+    serverAnswer.current = serverParser(item)
+    serverAnswer.current = null
     setProcessStatus(ProcessStatus.Result)
   })
 
-  useItemStartListener(() => {
+  useItemStartListener((event) => {
+    const img = new Image()
+    img.addEventListener('load', () => {
+      window.URL.revokeObjectURL(img.src) // Free some memory
+      setImageWidth(img.width)
+    })
+    img.src = window.URL.createObjectURL(event.file as unknown as Blob)
     setProcessStatus(ProcessStatus.Pending)
   })
 
   // Обработка события paste
   useEffect(() => {
-    // При входе в мини-апп фокус находится не в iframe, нужно явно его поставить
     window.focus()
     function onPaste(e: ClipboardEvent) {
       const files = e.clipboardData?.files
@@ -72,9 +82,13 @@ const App = (): JSX.Element => {
             <ImagePreview
               abortConnection={abortConnection}
               status={processStatus}
+              imageWidth={imageWidth}
+              coordinates={serverAnswer.current?.coordinates}
             />
 
-            {serverAnswer && <ResultCard {...serverAnswer} />}
+            {processStatus === ProcessStatus.Result && (
+              <ResultCard answer={serverAnswer.current} />
+            )}
 
             {processStatus === ProcessStatus.Start && (
               <Placeholder
@@ -86,7 +100,9 @@ const App = (): JSX.Element => {
               </Placeholder>
             )}
 
-            {serverAnswer && <RestartButton onRestart={onRestart} />}
+            {processStatus === ProcessStatus.Result && (
+              <RestartButton onRestart={onRestart} />
+            )}
           </div>
 
           {processStatus === ProcessStatus.Start && (
