@@ -8,13 +8,15 @@ type ResultCardProps = {
 }
 
 let ResultCard: React.FC<ResultCardProps> = ({ answer }) => {
+  const title = answer
+    ? `${answer?.animal} на ${answer?.probability}%`
+    : 'Неизвестный индивид'
+
   return (
     <Card className="ResultCard">
       <div className="ResultCard__subtitle">Алгоритм уверен что это</div>
 
-      <div className="ResultCard__title">
-        {answer?.animal} на {answer?.probability}%
-      </div>
+      <div className="ResultCard__title">{title}</div>
     </Card>
   )
 }

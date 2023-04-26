@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  useAbortAll,
+  useItemFinishListener,
+  useItemStartListener,
+} from '@rpldy/uploady'
 import { useUploady } from '@rpldy/shared-ui'
+import { serverParser } from './utils'
 import {
   DropPopup,
   ImagePreview,
@@ -9,15 +15,10 @@ import {
 } from './components'
 import { SplitLayout, SplitCol, Panel, Placeholder } from '@vkontakte/vkui'
 import { Icon56TagOutline } from '@vkontakte/icons'
-import {
-  useAbortAll,
-  useItemFinishListener,
-  useItemStartListener,
-} from '@rpldy/uploady'
+
 import { ProcessStatus, ServerAnswer } from './types'
 import '@vkontakte/vkui/dist/vkui.css'
 import './App.css'
-import { serverParser } from './utils'
 
 const App = (): JSX.Element => {
   const [isDragging, setIsDragging] = useState(false)
@@ -43,6 +44,7 @@ const App = (): JSX.Element => {
 
   useItemFinishListener((item) => {
     serverAnswer.current = serverParser(item)
+    serverAnswer.current = null
     setProcessStatus(ProcessStatus.Result)
   })
 

@@ -37,7 +37,7 @@
 }
 
 .ResultCard__title {
-  height: 32px;
+  min-height: 32px;
 
   font-style: normal;
   font-weight: 600;

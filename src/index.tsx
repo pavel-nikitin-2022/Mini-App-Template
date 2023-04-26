@@ -43,7 +43,7 @@ const mockSenderEnhancer = getMockSenderEnhancer({
       },
     ],
   },
-  delay: 3000,
+  delay: 300,
 })
 
 ReactDOM.render(
@@ -57,6 +57,18 @@ ReactDOM.render(
           clearPendingOnAdd
           maxConcurrent={1}
           enhancer={mockSenderEnhancer}
+          destination={{
+            url: 'https://lunacom.com',
+            filesParamName: 'file',
+            headers: {
+              mode: ['scene', 'multiobject', 'pedestrian'],
+              images: [
+                {
+                  name: 'file',
+                },
+              ],
+            },
+          }}
         >
           <App />
         </Uploady>
