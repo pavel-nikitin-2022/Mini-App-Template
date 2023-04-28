@@ -21,7 +21,7 @@ const mockSenderEnhancer = getMockSenderEnhancer({
             eng_categories: [],
             rus_categories: [],
             prob: 0.9586,
-            coord: [84, 309, 148, 404],
+            coord: [100, 100, 300, 300],
           },
           {
             eng: 'Person',
