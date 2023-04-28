@@ -43,7 +43,7 @@ const mockSenderEnhancer = getMockSenderEnhancer({
       },
     ],
   },
-  delay: 300,
+  delay: 3000,
 })
 
 ReactDOM.render(
