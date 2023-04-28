@@ -44,7 +44,6 @@ const App = (): JSX.Element => {
 
   useItemFinishListener((item) => {
     serverAnswer.current = serverParser(item)
-    serverAnswer.current = null
     setProcessStatus(ProcessStatus.Result)
   })
 

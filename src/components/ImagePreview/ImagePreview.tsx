@@ -6,7 +6,7 @@ import { ProcessStatus } from '../../types'
 import './ImagePreview.css'
 import { updateCoords } from '../../utils/updateCoords'
 
-type ImagePreviewProps = {
+export type ImagePreviewProps = {
   status: ProcessStatus
   abortConnection: () => void
   coordinates?: [number, number, number, number]
