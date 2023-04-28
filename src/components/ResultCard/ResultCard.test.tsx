@@ -5,13 +5,13 @@ import { ServerAnswer } from '../../types'
 
 const intServerAnswer: ServerAnswer = {
   animal: 'Кошка',
-  probability: 50,
+  probability: 0.6,
   coordinates: [1, 2, 3, 4],
 }
 
 const floatServerAnswer: ServerAnswer = {
   animal: 'Кошка',
-  probability: 12.223,
+  probability: 0.223,
   coordinates: [1, 2, 3, 4],
 }
 

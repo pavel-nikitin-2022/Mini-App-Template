@@ -9,7 +9,7 @@ type ResultCardProps = {
 
 let ResultCard: React.FC<ResultCardProps> = ({ answer }) => {
   const title = answer
-    ? `${answer?.animal} на ${Math.floor(answer?.probability)}%`
+    ? `${answer?.animal} на ${Math.floor(answer?.probability * 100)}%`
     : 'Неизвестный индивид'
 
   return (
