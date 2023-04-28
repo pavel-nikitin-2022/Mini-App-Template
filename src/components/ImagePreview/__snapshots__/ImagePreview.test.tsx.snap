@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImagePreview Проверка интерфейса при status pending 1`] = `[Function]`;
+
+exports[`ImagePreview Проверка интерфейса при status result 1`] = `[Function]`;
+
+exports[`ImagePreview Проверка интерфейса при status start 1`] = `[Function]`;

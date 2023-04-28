@@ -6,12 +6,12 @@ import { Div } from '@vkontakte/vkui'
 
 import './DropPopup.css'
 
-type LoaderPopupProps = {
+export type DropPopupProps = {
   isDraging: boolean
   discardDrag: () => void
 }
 
-let DropPopup: React.FC<LoaderPopupProps> = ({ isDraging, discardDrag }) => {
+let DropPopup: React.FC<DropPopupProps> = ({ isDraging, discardDrag }) => {
   return (
     <div
       onDragOver={(e) => e.preventDefault()}
