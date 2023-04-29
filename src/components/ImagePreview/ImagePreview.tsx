@@ -1,10 +1,11 @@
-import UploadPreview, { PreviewMethods } from '@rpldy/upload-preview'
 import React, { useEffect, useRef } from 'react'
+import UploadPreview, { PreviewMethods } from '@rpldy/upload-preview'
 import cx from 'classnames'
 import { Button, Spinner } from '@vkontakte/vkui'
-import { ProcessStatus } from '../../types'
+import { ProcessStatus } from 'types'
+import { updateCoords } from 'utils'
+
 import './ImagePreview.css'
-import { updateCoords } from '../../utils/updateCoords'
 
 export type ImagePreviewProps = {
   status: ProcessStatus

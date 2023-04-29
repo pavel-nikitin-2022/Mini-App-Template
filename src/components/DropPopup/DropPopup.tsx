@@ -1,8 +1,8 @@
-import UploadDropZone from '@rpldy/upload-drop-zone'
-import { Icon56GalleryOutline } from '@vkontakte/icons'
-import cx from 'classnames'
 import React from 'react'
+import UploadDropZone from '@rpldy/upload-drop-zone'
+import cx from 'classnames'
 import { Div } from '@vkontakte/vkui'
+import { Icon56GalleryOutline } from '@vkontakte/icons'
 
 import './DropPopup.css'
 

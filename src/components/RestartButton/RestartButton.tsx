@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@vkontakte/vkui'
+
 import './RestartButton.css'
 
 type ResultButtonsProps = {

@@ -5,7 +5,6 @@ import {
   useItemStartListener,
 } from '@rpldy/uploady'
 import { useUploady } from '@rpldy/shared-ui'
-import { serverParser } from './utils'
 import {
   DropPopup,
   ImagePreview,
@@ -15,8 +14,9 @@ import {
 } from './components'
 import { SplitLayout, SplitCol, Panel, Placeholder } from '@vkontakte/vkui'
 import { Icon56TagOutline } from '@vkontakte/icons'
-
 import { ProcessStatus, ServerAnswer } from './types'
+import { serverParser } from './utils'
+
 import '@vkontakte/vkui/dist/vkui.css'
 import './App.css'
 

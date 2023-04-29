@@ -2,7 +2,7 @@ import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { ImagePreview, ImagePreviewProps } from './ImagePreview'
 import Uploady from '@rpldy/uploady'
-import { ProcessStatus } from '../../types'
+import { ProcessStatus } from 'types'
 
 function setUp(props: Partial<ImagePreviewProps>) {
   return render(

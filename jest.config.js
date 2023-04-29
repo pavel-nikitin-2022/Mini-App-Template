@@ -10,6 +10,7 @@ module.exports = {
       './__mocks__/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
+  modulePaths: ['./src/'],
   collectCoverageFrom: ['src/components/**/*.tsx'],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',

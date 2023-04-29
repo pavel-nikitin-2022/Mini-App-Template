@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { ResultCard } from './ResultCard'
-import { ServerAnswer } from '../../types'
+import { ServerAnswer } from 'types'
 
 const intServerAnswer: ServerAnswer = {
   animal: 'Кошка',
@@ -18,7 +18,7 @@ const floatServerAnswer: ServerAnswer = {
 describe('ResultCard', () => {
   it('Проверка интерфейса, при корректном ответе сервера с целочисленным значением', () => {
     render(<ResultCard answer={intServerAnswer} />)
-    const title = screen.getByText(/.* на [0-9]?[0-9]%/)
+    const title = screen.getByText(/.*, на [0-9]?[0-9]%/)
     const subtitle = screen.getByText('Алгоритм уверен, что это')
     expect(title).toBeInTheDocument()
     expect(subtitle).toBeInTheDocument()
@@ -26,7 +26,7 @@ describe('ResultCard', () => {
 
   it('Проверка интерфейса, при корректном ответе сервера с дробным значением', () => {
     render(<ResultCard answer={floatServerAnswer} />)
-    const title = screen.getByText(/.* на [0-9]?[0-9]%/)
+    const title = screen.getByText(/.*, на [0-9]?[0-9]%/)
     const subtitle = screen.getByText('Алгоритм уверен, что это')
     expect(title).toBeInTheDocument()
     expect(subtitle).toBeInTheDocument()

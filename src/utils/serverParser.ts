@@ -1,5 +1,5 @@
 import { BatchItem } from '@rpldy/shared-ui'
-import { ServerAnswer } from '../types'
+import { ServerAnswer } from 'types'
 
 /**
  * Парсит ответ в сервера в ServerAnswer формат

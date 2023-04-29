@@ -1,6 +1,6 @@
+import React from 'react'
 import { asUploadButton } from '@rpldy/upload-button'
 import { Button } from '@vkontakte/vkui'
-import React from 'react'
 
 import './LoadButton.css'
 

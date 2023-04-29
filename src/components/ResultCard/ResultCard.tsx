@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from '@vkontakte/vkui'
-import { ServerAnswer } from '../../types'
+import { ServerAnswer } from 'types'
+
 import './ResultCard.css'
 
 type ResultCardProps = {
@@ -9,7 +10,7 @@ type ResultCardProps = {
 
 let ResultCard: React.FC<ResultCardProps> = ({ answer }) => {
   const title = answer
-    ? `${answer?.animal} на ${Math.floor(answer?.probability * 100)}%`
+    ? `${answer?.animal}, на ${Math.floor(answer?.probability * 100)}%`
     : 'Неизвестный индивид'
 
   return (
