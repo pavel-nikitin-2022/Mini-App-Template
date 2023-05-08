@@ -12,6 +12,7 @@
   margin: 0 auto;
   display: inline-block;
   max-height: 270px;
+  max-width: calc(100% - 20px);
   position: relative;
   backface-visibility: hidden;
   will-change: transform;
@@ -47,7 +48,9 @@
 .Preview__FoundObject {
   transform: scale(1);
   position: absolute;
-  border: 2px solid green;
   transform: scale(0);
-  animation: scale 0.75s linear 1s forwards;
+  max-height: 100%;
+  max-width: 100%;
+  animation: scale 0.5s linear 1s forwards;
+  box-sizing: border-box;
 }

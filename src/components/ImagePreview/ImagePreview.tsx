@@ -2,16 +2,16 @@ import React, { useEffect, useRef } from 'react'
 import UploadPreview, { PreviewMethods } from '@rpldy/upload-preview'
 import cx from 'classnames'
 import { Button, Spinner } from '@vkontakte/vkui'
-import { ProcessStatus } from 'types'
-import { updateCoords } from 'utils'
+import { ProcessStatus } from 'src/types'
+import { updateCoords } from 'src/utils'
 
 import './ImagePreview.css'
 
 export type ImagePreviewProps = {
   status: ProcessStatus
-  abortConnection: () => void
   coordinates?: [number, number, number, number]
   imageWidth?: number
+  abortConnection: () => void
 }
 
 let ImagePreview: React.FC<ImagePreviewProps> = ({
@@ -45,10 +45,11 @@ let ImagePreview: React.FC<ImagePreviewProps> = ({
       )
 
       Object.assign($foundObject.current.style, {
-        top: `${newCoords[0]}px`,
-        left: `${newCoords[1]}px`,
+        left: `${newCoords[0]}px`,
+        top: `${newCoords[1]}px`,
         width: `${newCoords[2] - newCoords[0]}px`,
         height: `${newCoords[3] - newCoords[1]}px`,
+        border: '2px solid green',
       })
     }
   }, [status, coordinates, imageWidth])

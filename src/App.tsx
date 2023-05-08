@@ -14,19 +14,19 @@ import {
 } from './components'
 import { SplitLayout, SplitCol, Panel, Placeholder } from '@vkontakte/vkui'
 import { Icon56TagOutline } from '@vkontakte/icons'
-import { ProcessStatus, ServerAnswer } from './types'
+import { FetchMLAnswerResponse, ProcessStatus } from './types'
 import { serverParser } from './utils'
 
-import '@vkontakte/vkui/dist/vkui.css'
 import './App.css'
 
 const App = (): JSX.Element => {
   const [isDragging, setIsDragging] = useState(false)
   const [processStatus, setProcessStatus] = useState(ProcessStatus.Start)
   const [imageWidth, setImageWidth] = React.useState(NaN)
-
-  const serverAnswer = useRef<ServerAnswer>(null)
-
+  const serverAnswer = useRef<FetchMLAnswerResponse>({
+    status: true,
+    data: null,
+  })
   const { upload } = useUploady()
   const abortAll = useAbortAll()
 
@@ -39,7 +39,7 @@ const App = (): JSX.Element => {
 
   const onRestart = useCallback(() => {
     setProcessStatus(ProcessStatus.Start)
-    serverAnswer.current = null
+    serverAnswer.current = { data: null, status: true }
   }, [])
 
   useItemFinishListener((item) => {
@@ -50,7 +50,7 @@ const App = (): JSX.Element => {
   useItemStartListener((event) => {
     const img = new Image()
     img.addEventListener('load', () => {
-      window.URL.revokeObjectURL(img.src) // Free some memory
+      window.URL.revokeObjectURL(img.src) // Очищение памяти
       setImageWidth(img.width)
     })
     img.src = window.URL.createObjectURL(event.file as unknown as Blob)
@@ -82,7 +82,11 @@ const App = (): JSX.Element => {
               abortConnection={abortConnection}
               status={processStatus}
               imageWidth={imageWidth}
-              coordinates={serverAnswer.current?.coordinates}
+              coordinates={
+                serverAnswer.current.status
+                  ? serverAnswer.current.data?.coordinates
+                  : undefined
+              }
             />
 
             {processStatus === ProcessStatus.Result && (

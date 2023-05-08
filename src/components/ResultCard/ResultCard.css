@@ -28,9 +28,6 @@
   font-size: 14px;
   line-height: 18px;
 
-  display: flex;
-  align-items: center;
-  text-align: center;
   letter-spacing: 0.2px;
   height: 18px;
   color: #818c99;
@@ -38,14 +35,18 @@
 
 .ResultCard__title {
   min-height: 32px;
-
+  max-width: 100%;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
   line-height: 32px;
 
-  display: flex;
-  align-items: center;
+  color: var(--vkui--color_background_accent);
+}
 
-  color: #2688eb;
+.ResultCard__title_error {
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  max-height: 180px;
+  color: var(--vkui--color_accent_red);
 }

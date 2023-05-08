@@ -1,7 +1,7 @@
 import React from 'react'
-import UploadDropZone from '@rpldy/upload-drop-zone'
 import cx from 'classnames'
-import { Div } from '@vkontakte/vkui'
+import UploadDropZone from '@rpldy/upload-drop-zone'
+import { Placeholder } from '@vkontakte/vkui'
 import { Icon56GalleryOutline } from '@vkontakte/icons'
 
 import './DropPopup.css'
@@ -20,8 +20,7 @@ let DropPopup: React.FC<DropPopupProps> = ({ isDraging, discardDrag }) => {
         e.preventDefault()
         discardDrag()
       }}
-      className={cx({
-        DropPopup: isDraging,
+      className={cx('DropPopup', {
         DropPopup_disable: !isDraging,
       })}
     >
@@ -29,10 +28,16 @@ let DropPopup: React.FC<DropPopupProps> = ({ isDraging, discardDrag }) => {
         className="DropPopup__dropZone"
         onDragOverClassName="DropPopup__dropZone_select"
       >
-        <Icon56GalleryOutline className="DropPopup__icon" />
-        <Div className="DropPopup__text">
+        <svg className="DropPopup__border">
+          <rect x="2" y="2" rx="20" />
+        </svg>
+
+        <Placeholder
+          className="DropPopup__placeholder"
+          icon={<Icon56GalleryOutline />}
+        >
           Перетащите сюда свои файлы или закройте, проведя по экрану
-        </Div>
+        </Placeholder>
       </UploadDropZone>
     </div>
   )
