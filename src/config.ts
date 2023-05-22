@@ -20,6 +20,7 @@ export const UPLOADY_SETTINGS = {
   accept: '.png,.jpg,.jpeg',
   fileFilter: fileFilter,
   multiple: false,
+  sendWithFormData: true,
   clearPendingOnAdd: true,
   maxConcurrent: 1,
   params: {
@@ -32,6 +33,6 @@ export const UPLOADY_SETTINGS = {
     accept: 'application/json',
   },
   destination: {
-    url: `https://smarty.mail.ru/api/v1/objects/detect?oauth_token=${process.env.REACT_APP_VK_CLOUD_TOKEN}&oauth_provider=mcs`,
+    url: `https://vk-cors-api.onrender.com/https://smarty.mail.ru/api/v1/objects/detect?oauth_token=${process.env.REACT_APP_VK_CLOUD_TOKEN}&oauth_provider=mcs`,
   },
 }
